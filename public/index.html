@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+   <body id="container" style='background-color:#3292C8'>
+      <h1 style='text-align:center'>TnT All Fours</h1>
+      <div id='elements' style='text-align:Center width:1200px'>
+         <h3 id='txtSlctOpt'>Select an Option</h3>
+         <select id='gameOptions'>
+            <option>All Fours</option>
+            <option>Romey</option>
+            <option>Five Hundred</option>
+         </select>
+         <button onclick="startGame()" id='button'>Start Game</button>
+      </div>
+
+    <script>
+    var socket=io.connect('http://localhost:4000');
+
+    var player1Hand = [];
+    var player2Hand = [];
+    var player3Hand = [];
+    var player4Hand = [];
+
+    var table = document.createElement("DIV");
+    table.id = "table";
+    table.style.width = "380px";
+    table.style.height = "380px";
+    table.style.background = "#4700b3";
+    table.style.color = "white";
+    table.style.position = "absolute"
+    table.style.left = "325px";
+    table.style.top = "160px"
+    var player1Cards = document.createElement("DIV");
+    var player2Cards = document.createElement("DIV");
+    var player3Cards = document.createElement("DIV");
+    var player4Cards = document.createElement("DIV");
+    var discards = document.createElement("DIV");
+
+    function removeElements() {
+        var parent = document.getElementById('elements');
+        var child = document.getElementById("txtSlctOpt");
+        parent.removeChild(child);
+        var child = document.getElementById("gameOptions");
+        parent.removeChild(child);
+        var child = document.getElementById('button');
+        parent.removeChild(child);
+    }
+
+function createElements() {
+    alert('First Jack Deal');
+
+    var container = document.getElementById('container');
+    container.innerHTML = table;
+
+}
+
+
+function displayCard(card){
+    alert(card.rank+card.suit);
+}
+
+function firstJackDeal(){
+
+}
+function startGame() {
+    removeElements();
+    createElements();
+    socket.emit('shuffleDeck',4);
+    //shuffleDeck(deck);
+    firstJackDeal();
+    //dispCard();
+}
+    </script>
+
+   </body>
+</html>

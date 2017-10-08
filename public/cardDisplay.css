@@ -1,0 +1,11 @@
+.card {
+  height: 160px; 
+  width: 120px;
+  padding: 3px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 300px;
+  display: inline-block;
+}
