@@ -13,7 +13,7 @@
             <option>Romey</option>
             <option>Five Hundred</option>
          </select>
-         <button onclick="startGame()" id='button'>Start Game</button>
+         <button onclick="main()" id='startGame'>Start Game</button>
       </div>
 
     <script>
@@ -23,7 +23,7 @@
     var player2Hand = [];
     var player3Hand = [];
     var player4Hand = [];
-
+    var gameStart = document.getElementById('startGame');
     var table = document.createElement("DIV");
     table.id = "table";
     table.style.width = "380px";
@@ -40,20 +40,21 @@
     var discards = document.createElement("DIV");
 
     function removeElements() {
+
         var parent = document.getElementById('elements');
         var child = document.getElementById("txtSlctOpt");
         parent.removeChild(child);
         var child = document.getElementById("gameOptions");
         parent.removeChild(child);
-        var child = document.getElementById('button');
+        var child = document.getElementById('startGame');
         parent.removeChild(child);
     }
 
-function createElements() {
+function createTable() {
     alert('First Jack Deal');
 
     var container = document.getElementById('container');
-    container.innerHTML = table;
+    container.appendChild(table);
 
 }
 
@@ -65,12 +66,14 @@ function displayCard(card){
 function firstJackDeal(){
 
 }
-function startGame() {
+function main() {
     removeElements();
-    createElements();
-    socket.emit('shuffleDeck',4);
-    //shuffleDeck(deck);
-    firstJackDeal();
+    createTable();
+    var x = Math.floor(Math.random() * 10);
+    console.log('x is equal to: ' +x );
+    socket.emit('shuffleDeck', x * 1000);
+    console.log('Emitted shuiffleDeck');
+    //shuffleDeck(7);
     //dispCard();
 }
     </script>
